@@ -30,7 +30,8 @@ QTime MainWindow::getTime()
 void MainWindow::saveTime(QTime *time)
 {
 
-    timemap[date->currentDate().toString()]=time->currentTime();
+
+    timemap.insertMulti(date->currentDate().toString(),time->currentTime());
     qDebug()<<timemap;
 }
 
