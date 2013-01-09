@@ -22,16 +22,17 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::getTime()
 {
     qDebug()<<time->currentTime().toString();
-    saveTime();
+
+    saveTime(time->currentTime(),date->currentDate());
     ui->lineEdit_hours_per_week->setText("");
     ui->lineEdit_hours_per_week->setText(time->currentTime().toString());
 
 }
 
 // save time to sqllite3
-void MainWindow::saveTime()
+void MainWindow::saveTime(QTime time,QDate date)
 {
-
+      database->saveTime(time,date);
 }
 
 MainWindow::~MainWindow()

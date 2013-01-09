@@ -33,7 +33,7 @@ private:
     QSqlTableModel model;
 public slots:
     void getTime();
-    void saveTime();
+    void saveTime(QTime time, QDate date);
 
 };
 
