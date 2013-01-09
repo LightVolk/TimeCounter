@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QTime>
+#include <QDebug>
+#include <QSettings>
+#include <QVariantMap>>
+#include <QDate>
 namespace Ui {
 class MainWindow;
 }
@@ -19,10 +23,12 @@ private:
     Ui::MainWindow *ui;
     QTime *time;
     int h,m,s,ms;
-
+    QSettings *mysettings;
+    QVariantMap timemap;
+    QDate *date;
 public slots:
     QTime getTime();
-    QTime saveTime(QTime *time);
+    void saveTime(QTime *time);
 
 };
 
