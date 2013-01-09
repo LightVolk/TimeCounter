@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     QCoreApplication::setOrganizationName("Konstantin Maleev");
     QCoreApplication::setOrganizationDomain("simplevolk.net");
     QCoreApplication::setApplicationName("TimeCounter");
@@ -18,24 +17,25 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pB_time,SIGNAL(clicked()),this,SLOT(getTime()));
 }
 
-QTime MainWindow::getTime()
+// get and viev time
+void MainWindow::getTime()
 {
     qDebug()<<time->currentTime().toString();
-
-    saveTime(time);
-    return time->currentTime();
+    saveTime();
+    ui->lineEdit_hours_per_week->setText("");
+    ui->lineEdit_hours_per_week->setText(time->currentTime().toString());
 
 }
 
-void MainWindow::saveTime(QTime *time)
+// save time to sqllite3
+void MainWindow::saveTime()
 {
 
 
-    timemap.insertMulti(date->currentDate().toString(),time->currentTime());
-    qDebug()<<timemap;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
