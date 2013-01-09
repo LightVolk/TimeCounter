@@ -15,8 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 QTime MainWindow::getTime()
 {
-    return time->currentTime();
     qDebug()<<time->currentTime();
+    return time->currentTime();
+
 }
 
 QTime MainWindow::saveTime(QTime *time)
