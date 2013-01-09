@@ -12,10 +12,7 @@ public:
 signals:
     
 public slots:
-    QSqlDatabase createDatabase(QString basename);
-    QSqlDatabase createTable(QString tablename);
-    int insertTime(QTime time);//insert new line in table
-    int removeTime(QTime time);
+   void init();
 };
 
 #endif // DATABASE_H

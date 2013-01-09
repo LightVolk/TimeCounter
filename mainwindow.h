@@ -8,6 +8,8 @@
 #include <QVariantMap>>
 #include <QDate>
 #include <QtSql>
+
+#include <database.h>
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +29,8 @@ private:
     QSettings *mysettings;
     QVariantMap timemap;
     QDate *date;
+    Database *database;
+    QSqlTableModel model;
 public slots:
     void getTime();
     void saveTime();

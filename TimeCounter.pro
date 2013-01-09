@@ -20,3 +20,6 @@ HEADERS  += mainwindow.h \
     database.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    TODO.txt
