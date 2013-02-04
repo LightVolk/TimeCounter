@@ -34,6 +34,7 @@ private:
 public slots:
     void getTime();
     void saveTime(QTime time, QDate date);
+    void outputData(QSqlTableModel *model);
 
 };
 

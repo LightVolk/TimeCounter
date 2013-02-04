@@ -12,18 +12,18 @@ public:
     explicit Database(QObject *parent = 0);
 
 private:
- QSqlDatabase db;
- QSqlTableModel _model;
+ QSqlDatabase *db;
+ QSqlTableModel *_model;
  int rowcounter;
  QSqlDatabase getDb();
 // QSqlTableModel getModel();
 
 signals:
-
+ void signal_send_model(QSqlTableModel*);
 public slots:
-   void init();
-   void saveTime(QTime time,QDate date);
 
+   void saveTime(QTime time,QDate date);
+   void outputAllTime();
 };
 
 #endif // DATABASE_H

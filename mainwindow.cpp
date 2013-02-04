@@ -14,8 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     time=new QTime(h,m,s,ms);
     date=new QDate();
     database=new Database(this);
-    database->init();
+
     connect(ui->pB_time,SIGNAL(clicked()),this,SLOT(getTime()));
+    connect(database,SIGNAL(signal_send_model(QSqlTableModel*)),this,SLOT(outputData(QSqlTableModel*)));
 }
 
 // get and viev time
@@ -32,9 +33,19 @@ void MainWindow::getTime()
 // save time to sqllite3
 void MainWindow::saveTime(QTime time,QDate date)
 {
-      database->saveTime(time,date);
-}
+    database->saveTime(time,date);
 
+    //test
+    database->outputAllTime();
+}
+void MainWindow::outputData(QSqlTableModel *model)
+{
+
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+    ui->tableView->setVisible(true);
+    qDebug()<<this<<__FUNCTION__<<__LINE__<<"output";
+}
 MainWindow::~MainWindow()
 {
     delete ui;
