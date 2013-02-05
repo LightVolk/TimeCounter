@@ -3,33 +3,31 @@
 Database::Database(QObject *parent) :
     QObject(parent)
 {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     rowcounter=0;
     _model=new QSqlTableModel(this);
-    db=new QSqlDatabase();
-    db->addDatabase("QSQLITE");
-    //if(!db->isOpen())
-   // {
-        if("TimeCounter"!=db->databaseName())
+
+    if("TimeCounter"!=db.databaseName())
         {
-            qDebug()<<this<<__FUNCTION__<<__LINE__<<db->lastError().text();
-            db->setDatabaseName("TimeCounter");
+            qDebug()<<this<<__FUNCTION__<<__LINE__<<db.lastError().text();
+            db.setDatabaseName("TimeCounter");
             _model->setTable("Time");
             _model->setHeaderData(0, Qt::Horizontal, "id");
             _model->setHeaderData(1, Qt::Horizontal, "Time");
             _model->setHeaderData(2, Qt::Horizontal, "Date");
-            qDebug()<<this<<__FUNCTION__<<__LINE__<<"Db created"<<db->databaseName();
+            qDebug()<<this<<__FUNCTION__<<__LINE__<<"Db created"<<db.databaseName();
             qDebug()<<this<<__FUNCTION__<<__LINE__<<_model->tableName();
         }
-  //  }
-  //  else {
-  //      qDebug()<<this<<__FUNCTION__<<__LINE__<<"db is open";
-  //      db->close();
-  //  }
+    else {
+        qDebug()<<this<<__FUNCTION__<<__LINE__<<"TimeCounter name exists";
+
+    }
+
 
 }
 QSqlDatabase Database::getDb()
 {
-    return *db;
+  //  return *db;
 }
 
 

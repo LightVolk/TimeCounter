@@ -12,7 +12,7 @@ public:
     explicit Database(QObject *parent = 0);
 
 private:
- QSqlDatabase *db;
+ //QSqlDatabase *db;
  QSqlTableModel *_model;
  int rowcounter;
  QSqlDatabase getDb();

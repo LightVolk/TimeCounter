@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql
-
+QTPLUGIN += qsqlite
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = TimeCounter
@@ -22,4 +22,5 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 OTHER_FILES += \
-    TODO.txt
+    TODO.txt \
+    libqsqlite.so
