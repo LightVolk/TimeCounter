@@ -15,7 +15,7 @@ private:
  //QSqlDatabase *db;
  QSqlTableModel *_model;
  int rowcounter;
- QSqlDatabase getDb();
+
 // QSqlTableModel getModel();
 
 signals:
@@ -23,7 +23,7 @@ signals:
 public slots:
 
    void saveTime(QTime time,QDate date);
-   void outputAllTime();
+
 };
 
 #endif // DATABASE_H
