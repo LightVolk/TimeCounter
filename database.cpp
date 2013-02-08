@@ -4,7 +4,7 @@ Database::Database(QObject *parent) :
     QObject(parent)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.open();
+
 
     rowcounter=0;
     _model=new QSqlTableModel(this);
@@ -13,7 +13,16 @@ Database::Database(QObject *parent) :
     qDebug()<<this<<__FUNCTION__<<__LINE__<<db.lastError().text();
     db.setDatabaseName("TimeCounter");
     _model->setTable("Time");
-    _model->insertColumn(0);
+    if(_model->select()!=true)
+    {
+          qDebug()<<this<<__FUNCTION__<<__LINE__<<"model select failed";
+    }
+    if(_model->database().transaction()!=true)
+    {
+        qDebug()<<this<<__FUNCTION__<<__LINE__<<"transaction failed";
+    }
+
+   bool inscolumn=_model->insertColumn(0);
     _model->insertColumn(1);
     _model->insertColumn(2);
 
@@ -22,8 +31,14 @@ Database::Database(QObject *parent) :
     _model->setHeaderData(1, Qt::Horizontal, "Time");
     _model->setHeaderData(2, Qt::Horizontal, "Date");
 
-    _model->submitAll();
-    qDebug()<<this<<__FUNCTION__<<__LINE__<<"Db created"<<db.databaseName();
+    if(_model->submitAll()!=true)
+    {
+         qDebug()<<this<<__FUNCTION__<<__LINE__<<"submit failed";
+    }
+    else {
+         qDebug()<<this<<__FUNCTION__<<__LINE__<<"sumbit success";
+    }
+    qDebug()<<this<<__FUNCTION__<<__LINE__<<"Db created"<<db.databaseName()<<"insert column"<<inscolumn;
     qDebug()<<this<<__FUNCTION__<<__LINE__<<_model->tableName()<<_model->columnCount();
 
     rowcounter=0;
@@ -45,8 +60,8 @@ void Database::saveTime(QTime time,QDate date)
 
 
     bool issubmitall=_model->submitAll();
-
-    qDebug()<<this<<__FUNCTION__<<__LINE__<<issubmitall<<"rowcount"<<_model->rowCount();
+    _model->database().commit();
+    qDebug()<<this<<__FUNCTION__<<__LINE__<<"is model submit "<<issubmitall<<"rowcount"<<_model->rowCount();
     rowcounter++;
   emit signal_send_model(_model);
 
