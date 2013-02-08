@@ -8,6 +8,7 @@
 #include <QVariantMap>>
 #include <QDate>
 #include <QtSql>
+#include <QStandardItemModel>
 
 #include <database.h>
 namespace Ui {

@@ -17,6 +17,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->pB_time,SIGNAL(clicked()),this,SLOT(getTime()));
     connect(database,SIGNAL(signal_send_model(QSqlTableModel*)),this,SLOT(outputData(QSqlTableModel*)));
+
+
+    /// qTableView init
+    QStandardItemModel *model= new QStandardItemModel(2,3,this); //2 Rows and 3 Columns
+    model->setHorizontalHeaderItem(0, new QStandardItem(QString("Column1 Header")));
+    model->setHorizontalHeaderItem(1, new QStandardItem(QString("Column2 Header")));
+    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Column3 Header")));
+    ui->tableView->setModel(model);
+
 }
 
 // get and viev time
@@ -40,11 +49,11 @@ void MainWindow::saveTime(QTime time,QDate date)
 }
 void MainWindow::outputData(QSqlTableModel *model)
 {
-
     ui->tableView->setModel(model);
-    ui->tableView->resizeColumnsToContents();
-    ui->tableView->setVisible(true);
-    qDebug()<<this<<__FUNCTION__<<__LINE__<<"output";
+
+    //ui->tableView->resizeColumnsToContents();
+   // ui->tableView->setVisible(true);
+    qDebug()<<this<<__FUNCTION__<<__LINE__<<"output"<<model->tableName()<<model->columnCount();
 }
 MainWindow::~MainWindow()
 {
